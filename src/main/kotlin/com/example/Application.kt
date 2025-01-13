@@ -1,5 +1,10 @@
 package com.example
 
+import com.example.authentification.JwtService
+import com.example.data.repository.CardRepositoryImpl
+import com.example.data.repository.UserRepositoryImpl
+import com.example.domain.usecase.CardUseCase
+import com.example.domain.usecase.UserUseCase
 import com.example.plugins.DatabaseFactory.initializationDatabase
 import com.example.plugins.configureMonitoring
 import com.example.plugins.configureSecurity
@@ -18,10 +23,16 @@ fun main() {
 }
 
 fun Application.module() {
+
+    val jwtService = JwtService()
+    val userRepository = UserRepositoryImpl()
+    val cardRepository = CardRepositoryImpl()
+    val userUseCase = UserUseCase(userRepository, jwtService)
+    val cardUseCase = CardUseCase(cardRepository)
+
     initializationDatabase()
     configureMonitoring()
     configureSerialization()
-    configureSecurity()
-
+    configureSecurity(userUseCase)
 //    configureRouting()
 }
