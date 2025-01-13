@@ -1,12 +1,14 @@
-package com.example.data.model
+package com.example.data.model.request
 
-data class UserModel(
-    val id: Int,
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class RegisterRequest(
     val email: String,
     val login: String,
     val password: String,
     val firstName: String,
     val lastName: String,
     val isActive: Boolean = false,
-    val role: RoleModel,
+    val role: String
 )

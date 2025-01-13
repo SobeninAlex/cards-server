@@ -7,6 +7,7 @@ import com.example.domain.usecase.CardUseCase
 import com.example.domain.usecase.UserUseCase
 import com.example.plugins.DatabaseFactory.initializationDatabase
 import com.example.plugins.configureMonitoring
+import com.example.plugins.configureRouting
 import com.example.plugins.configureSecurity
 import com.example.plugins.configureSerialization
 import io.ktor.server.application.*
@@ -33,6 +34,11 @@ fun Application.module() {
     initializationDatabase()
     configureMonitoring()
     configureSerialization()
-    configureSecurity(userUseCase)
-//    configureRouting()
+    configureSecurity(
+        userUseCase = userUseCase
+    )
+    configureRouting(
+        userUseCase = userUseCase,
+        cardUseCase = cardUseCase
+    )
 }
