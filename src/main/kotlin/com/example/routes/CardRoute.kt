@@ -127,14 +127,24 @@ fun Route.cardRoute(cardUseCase: CardUseCase) {
 
             try {
                 val ownerId = call.principal<UserModel>()!!.id
-                cardUseCase.deleteCard(cardId = request, owner = ownerId)
-                call.respond(
-                    status = HttpStatusCode.OK,
-                    message = BaseResponse(
-                        isSuccess = true,
-                        message = SuccessMessage.CARD_DELETED_SUCCESSFULLY
+                val result = cardUseCase.deleteCard(cardId = request, owner = ownerId)
+                if (result > 0) {
+                    call.respond(
+                        status = HttpStatusCode.OK,
+                        message = BaseResponse(
+                            isSuccess = true,
+                            message = SuccessMessage.CARD_DELETED_SUCCESSFULLY
+                        )
                     )
-                )
+                } else {
+                    call.respond(
+                        status = HttpStatusCode.NotFound,
+                        message = BaseResponse(
+                            isSuccess = false,
+                            message = SuccessMessage.CARD_NOT_FOUND
+                        )
+                    )
+                }
             } catch (ex: Exception) {
                 call.respond(
                     status = HttpStatusCode.Conflict,

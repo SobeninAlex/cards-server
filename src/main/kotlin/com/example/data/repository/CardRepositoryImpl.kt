@@ -44,8 +44,8 @@ class CardRepositoryImpl : CardRepository {
         }
     }
 
-    override suspend fun deleteCard(cardId: Int, owner: Int) {
-        dbQuery {
+    override suspend fun deleteCard(cardId: Int, owner: Int): Int {
+        return dbQuery {
             CardTable.deleteWhere {
                 id.eq(cardId) and ownerId.eq(owner)
             }

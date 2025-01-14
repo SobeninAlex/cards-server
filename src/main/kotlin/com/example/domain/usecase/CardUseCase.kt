@@ -19,8 +19,8 @@ class CardUseCase(
         cardRepository.updateCard(card = card, owner = owner)
     }
 
-    suspend fun deleteCard(cardId: Int, owner: Int) {
-        cardRepository.deleteCard(cardId = cardId, owner = owner)
+    suspend fun deleteCard(cardId: Int, owner: Int): Int {
+        return cardRepository.deleteCard(cardId = cardId, owner = owner)
     }
 
 }

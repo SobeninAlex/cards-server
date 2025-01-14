@@ -17,4 +17,5 @@ object SuccessMessage {
     const val CARD_ADDED_SUCCESSFULLY = "Card added successfully!"
     const val CARD_UPDATED_SUCCESSFULLY = "Card updated successfully!"
     const val CARD_DELETED_SUCCESSFULLY = "Card deleted successfully!"
+    const val CARD_NOT_FOUND = "Card not found!"
 }

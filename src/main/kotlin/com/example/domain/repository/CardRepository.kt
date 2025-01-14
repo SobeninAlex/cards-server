@@ -10,6 +10,6 @@ interface CardRepository {
 
     suspend fun updateCard(card: CardModel, owner: Int)
 
-    suspend fun deleteCard(cardId: Int, owner: Int)
+    suspend fun deleteCard(cardId: Int, owner: Int): Int
 
 }
