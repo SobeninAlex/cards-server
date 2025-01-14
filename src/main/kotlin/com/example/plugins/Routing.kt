@@ -2,6 +2,7 @@ package com.example.plugins
 
 import com.example.domain.usecase.CardUseCase
 import com.example.domain.usecase.UserUseCase
+import com.example.routes.cardRoute
 import com.example.routes.userRoute
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -13,5 +14,6 @@ fun Application.configureRouting(
 ) {
     routing {
         userRoute(userUseCase = userUseCase)
+        cardRoute(cardUseCase = cardUseCase)
     }
 }

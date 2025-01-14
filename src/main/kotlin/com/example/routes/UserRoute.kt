@@ -9,6 +9,7 @@ import com.example.data.model.response.BaseResponse
 import com.example.domain.usecase.UserUseCase
 import com.example.utils.ErrorMessage
 import io.ktor.http.*
+import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -112,6 +113,36 @@ fun Route.userRoute(userUseCase: UserUseCase) {
                     message = ex.message ?: ErrorMessage.SOMETHING_WRONG
                 )
             )
+        }
+    }
+
+    authenticate("jwt") {
+        get("api/v1/get_user_info") {
+            try {
+                val user = call.principal<UserModel>()
+                if (user != null) {
+                    call.respond(
+                        status = HttpStatusCode.OK,
+                        message = user
+                    )
+                } else {
+                    call.respond(
+                        status = HttpStatusCode.NotFound,
+                        message = BaseResponse(
+                            isSuccess = false,
+                            message = ErrorMessage.USER_NOT_FOUND
+                        )
+                    )
+                }
+            } catch (ex: Exception) {
+                call.respond(
+                    status = HttpStatusCode.Conflict,
+                    message = BaseResponse(
+                        isSuccess = false,
+                        message = ex.message ?: ErrorMessage.SOMETHING_WRONG
+                    )
+                )
+            }
         }
     }
 }
