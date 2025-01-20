@@ -1,10 +1,10 @@
 package com.example.domain.usecase
 
 import com.example.data.model.CardModel
-import com.example.data.repository.CardRepositoryImpl
+import com.example.domain.repository.CardRepository
 
 class CardUseCase(
-    private val cardRepository: CardRepositoryImpl
+    private val cardRepository: CardRepository
 ) {
 
     suspend fun addCard(card: CardModel) {

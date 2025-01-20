@@ -4,7 +4,8 @@ The simplest example of Kotlin Ktor Server
 
 ## stack
 - Ktor
+- DI (Koin)
 - Exposed
 - Hikari
-- PostgreSQL
+- Postgres SQL
 - JWTAuth
